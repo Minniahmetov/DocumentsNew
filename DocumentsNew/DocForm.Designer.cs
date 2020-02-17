@@ -46,6 +46,7 @@
             this.GoodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tablePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tablePartStringBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablePartGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePartBindingSource)).BeginInit();
@@ -122,7 +123,7 @@
             // OkButton
             // 
             this.OkButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OkButton.Location = new System.Drawing.Point(318, 352);
+            this.OkButton.Location = new System.Drawing.Point(318, 385);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
             this.OkButton.TabIndex = 1;
@@ -132,7 +133,7 @@
             // CancelButton
             // 
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(399, 352);
+            this.CancelButton.Location = new System.Drawing.Point(399, 385);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 2;
@@ -152,18 +153,20 @@
             this.quantity,
             this.Balance,
             this.GoodId});
-            this.TablePartGrid.Location = new System.Drawing.Point(13, 169);
+            this.TablePartGrid.Location = new System.Drawing.Point(13, 202);
             this.TablePartGrid.Name = "TablePartGrid";
             this.TablePartGrid.Size = new System.Drawing.Size(461, 150);
             this.TablePartGrid.TabIndex = 3;
             this.TablePartGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.TablePartGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.TablePartGrid_CellValueChanged);
             this.TablePartGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.TablePartGrid_EditingControlShowing);
+            this.TablePartGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.TablePartGrid_RowsAdded);
             // 
             // Serial
             // 
             this.Serial.HeaderText = "№";
             this.Serial.Name = "Serial";
+            this.Serial.ReadOnly = true;
             // 
             // GoodName
             // 
@@ -179,6 +182,7 @@
             // 
             this.Balance.HeaderText = "Остаток";
             this.Balance.Name = "Balance";
+            this.Balance.ReadOnly = true;
             // 
             // GoodId
             // 
@@ -194,11 +198,22 @@
             // 
             this.tablePartStringBindingSource.DataSource = typeof(DocumentsNew.TablePartString);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 155);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DocForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 476);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.TablePartGrid);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
@@ -227,11 +242,12 @@
         protected internal System.Windows.Forms.DataGridView TablePartGrid;
         private System.Windows.Forms.BindingSource tablePartBindingSource;
         private System.Windows.Forms.BindingSource tablePartStringBindingSource;
+        protected internal System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn Serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoodName;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoodId;
-        protected internal System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button button1;
     }
 }

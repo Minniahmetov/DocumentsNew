@@ -110,5 +110,28 @@ namespace DocumentsNew
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddStringToTablePart();
+        }
+
+        private void AddStringToTablePart()
+        {
+
+        }
+
+        private void TablePartGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            FillSerials();
+        }
+
+        private void FillSerials()
+        {
+            foreach (DataGridViewRow row in TablePartGrid.Rows)
+            {
+                row.Cells[Serial.Index].Value = (row.Index + 1).ToString();
+            }
+        }
     }
 }
