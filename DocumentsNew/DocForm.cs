@@ -118,7 +118,62 @@ namespace DocumentsNew
 
         private void AddStringToTablePart()
         {
+                TablePartGrid.Rows.Add();
+        }
 
+        private void RemoveStringFromTAblePart()
+        {
+
+            if (TablePartGrid.GetCellCount(DataGridViewElementStates.Selected) > 0)
+            {
+                if (TablePartGrid.SelectedRows.Count > 0)
+                {   
+                    //обработать удаление выделенных строк(1 или больше)
+                    List<DataGridViewRow> rows4remove = new List<DataGridViewRow>();
+                    try
+                    {
+                        foreach (DataGridViewRow selectedRow in TablePartGrid.SelectedRows)
+                        {
+                            rows4remove.Add(selectedRow);
+                        }
+                        foreach (DataGridViewRow row4remove in rows4remove)
+                        {
+                            TablePartGrid.Rows.Remove(row4remove);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ошибка при удалении выделынных строк");
+                    }
+                    
+                }
+                else
+                {
+                    //обработать удаление строк с выделенными ячейками
+                    try
+                    {
+                        List<DataGridViewRow> rows4remove = new List<DataGridViewRow>();
+                        int selectedCellsCount = TablePartGrid.GetCellCount(DataGridViewElementStates.Selected);
+                        for (int i = 0; i < selectedCellsCount; i++)
+                        {
+                            int rowIndex = TablePartGrid.SelectedCells[i].RowIndex;
+                            DataGridViewRow row4remove = TablePartGrid.Rows[rowIndex];
+                            if (!rows4remove.Contains(row4remove))
+                                rows4remove.Add(row4remove);
+                        }
+                        foreach (DataGridViewRow row4remove in rows4remove)
+                        {
+                            TablePartGrid.Rows.Remove(row4remove);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ошибка при удалении выделынных строк");
+                    }
+                    
+                }
+            }
+            
         }
 
         private void TablePartGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -132,6 +187,16 @@ namespace DocumentsNew
             {
                 row.Cells[Serial.Index].Value = (row.Index + 1).ToString();
             }
+        }
+
+        private void RowDeleteButton_Click(object sender, EventArgs e)
+        {
+            RemoveStringFromTAblePart();
+        }
+
+        private void TablePartGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            FillSerials();
         }
     }
 }

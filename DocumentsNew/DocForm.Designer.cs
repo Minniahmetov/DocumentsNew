@@ -44,9 +44,10 @@
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GoodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.RowDeleteButton = new System.Windows.Forms.Button();
             this.tablePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tablePartStringBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablePartGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePartBindingSource)).BeginInit();
@@ -161,6 +162,7 @@
             this.TablePartGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.TablePartGrid_CellValueChanged);
             this.TablePartGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.TablePartGrid_EditingControlShowing);
             this.TablePartGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.TablePartGrid_RowsAdded);
+            this.TablePartGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.TablePartGrid_RowsRemoved);
             // 
             // Serial
             // 
@@ -190,6 +192,26 @@
             this.GoodId.Name = "GoodId";
             this.GoodId.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 155);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Добавить строку";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // RowDeleteButton
+            // 
+            this.RowDeleteButton.Location = new System.Drawing.Point(154, 156);
+            this.RowDeleteButton.Name = "RowDeleteButton";
+            this.RowDeleteButton.Size = new System.Drawing.Size(117, 23);
+            this.RowDeleteButton.TabIndex = 5;
+            this.RowDeleteButton.Text = "Удалить строку";
+            this.RowDeleteButton.UseVisualStyleBackColor = true;
+            this.RowDeleteButton.Click += new System.EventHandler(this.RowDeleteButton_Click);
+            // 
             // tablePartBindingSource
             // 
             this.tablePartBindingSource.DataSource = typeof(DocumentsNew.TablePart);
@@ -198,21 +220,12 @@
             // 
             this.tablePartStringBindingSource.DataSource = typeof(DocumentsNew.TablePartString);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 155);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // DocForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 476);
+            this.Controls.Add(this.RowDeleteButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TablePartGrid);
             this.Controls.Add(this.CancelButton);
@@ -249,5 +262,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
         private System.Windows.Forms.DataGridViewTextBoxColumn GoodId;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RowDeleteButton;
     }
 }
