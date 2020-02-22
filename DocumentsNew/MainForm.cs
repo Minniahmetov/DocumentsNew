@@ -36,42 +36,73 @@ namespace DocumentsNew
 
             if (result == DialogResult.Cancel) return;
 
-            Doc doc = new Doc();
-            doc.DateTime = docForm.dateTimePicker1.Value;
-            doc.DocType = docForm.comboBox1.SelectedItem.ToString();
-            db.Docs.Add(doc);
-            db.SaveChanges();
-
-            TablePart tablePart = new TablePart();
-            tablePart.Id = doc.Id;
-
-            foreach (DataGridViewRow row in docForm.TablePartGrid.Rows)
+            if (result == DialogResult.OK)
             {
-                TablePartString tablePartString = new TablePartString();
-                tablePartString.GoodId = Int32.Parse(row.Cells["GoodId"].Value.ToString());
+                Doc doc = new Doc();
+                doc.DateTime = docForm.dateTimePicker1.Value;
+                doc.DocType = docForm.comboBox1.SelectedItem.ToString();
+                db.Docs.Add(doc);
+                db.SaveChanges();
 
-                tablePartString.Quantity = Int32.Parse(row.Cells["quantity"].Value.ToString());
-                tablePartString.Balance = Int32.Parse(row.Cells["Balance"].Value.ToString());
+                TablePart tablePart = new TablePart();
+                tablePart.Id = doc.Id;
 
-                tablePart.TablePartStrings.Add(tablePartString);
-
+                foreach (DataGridViewRow row in docForm.TablePartGrid.Rows)
                 {
-                    if (db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).Count() > 0)
+                    TablePartString tablePartString = new TablePartString();
+                    tablePartString.GoodId = Int32.Parse(row.Cells["GoodId"].Value.ToString());
+
+                    tablePartString.Quantity = Int32.Parse(row.Cells["quantity"].Value.ToString());
+                    tablePartString.Balance = Int32.Parse(row.Cells["Balance"].Value.ToString());
+
+                    tablePart.TablePartStrings.Add(tablePartString);
+
                     {
-                        DateTime lastRegDate = db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).Max(b => b.DateTime);
-                        if (lastRegDate != null)
+                        if (db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).Count() > 0)
                         {
-                            //есть регистрирующая запись
-                            var Regs = db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).ToList();
-                            if (Regs.Count > 0)
+                            DateTime lastRegDate = db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).Max(b => b.DateTime);
+                            if (lastRegDate != null)
                             {
-                                GoodBalnce lastReg = Regs.Find(r => r.DateTime == lastRegDate);
-                                //создать запись
+                                //есть регистрирующая запись
+                                var Regs = db.GoodBalnces.Where(b => b.GoodId == tablePartString.GoodId).ToList();
+                                if (Regs.Count > 0)
+                                {
+                                    GoodBalnce lastReg = Regs.Find(r => r.DateTime == lastRegDate);
+                                    //создать запись
+                                    GoodBalnce newReg = new GoodBalnce();
+                                    newReg.GoodId = tablePartString.GoodId;
+                                    newReg.DocId = doc.Id;
+                                    newReg.DateTime = doc.DateTime;
+                                    newReg.openingBalance = tablePartString.Balance;
+                                    if (doc.DocType == "Списание")
+                                    {
+                                        newReg.Flow = 0;
+                                        newReg.Cancellaton = tablePartString.Quantity;
+                                    }
+                                    else
+                                    {
+                                        newReg.Flow = tablePartString.Quantity;
+                                        newReg.Cancellaton = 0;
+                                    }
+                                    newReg.Balance = newReg.openingBalance - newReg.Cancellaton + newReg.Flow;
+
+                                    db.GoodBalnces.Add(newReg);
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    //обработать ошибку
+                                }
+                            }
+                            else
+                            {
+                                //нет регистрирующих записей
+                                //создать первую регистрирующую запись
                                 GoodBalnce newReg = new GoodBalnce();
                                 newReg.GoodId = tablePartString.GoodId;
                                 newReg.DocId = doc.Id;
                                 newReg.DateTime = doc.DateTime;
-                                newReg.openingBalance = tablePartString.Balance;
+                                newReg.openingBalance = 0;
                                 if (doc.DocType == "Списание")
                                 {
                                     newReg.Flow = 0;
@@ -82,19 +113,16 @@ namespace DocumentsNew
                                     newReg.Flow = tablePartString.Quantity;
                                     newReg.Cancellaton = 0;
                                 }
+
+
                                 newReg.Balance = newReg.openingBalance - newReg.Cancellaton + newReg.Flow;
 
                                 db.GoodBalnces.Add(newReg);
                                 db.SaveChanges();
                             }
-                            else
-                            {
-                                //обработать ошибку
-                            }
                         }
                         else
                         {
-                            //нет регистрирующих записей
                             //создать первую регистрирующую запись
                             GoodBalnce newReg = new GoodBalnce();
                             newReg.GoodId = tablePartString.GoodId;
@@ -118,41 +146,16 @@ namespace DocumentsNew
                             db.GoodBalnces.Add(newReg);
                             db.SaveChanges();
                         }
+
                     }
-                    else
-                    {
-                        //создать первую регистрирующую запись
-                        GoodBalnce newReg = new GoodBalnce();
-                        newReg.GoodId = tablePartString.GoodId;
-                        newReg.DocId = doc.Id;
-                        newReg.DateTime = doc.DateTime;
-                        newReg.openingBalance = 0;
-                        if (doc.DocType == "Списание")
-                        {
-                            newReg.Flow = 0;
-                            newReg.Cancellaton = tablePartString.Quantity;
-                        }
-                        else
-                        {
-                            newReg.Flow = tablePartString.Quantity;
-                            newReg.Cancellaton = 0;
-                        }
 
-
-                        newReg.Balance = newReg.openingBalance - newReg.Cancellaton + newReg.Flow;
-
-                        db.GoodBalnces.Add(newReg);
-                        db.SaveChanges();
-                    }
-                    
                 }
 
+                db.TableParts.Add(tablePart);
+                db.SaveChanges();
+
+                MessageBox.Show("Документ добавлен!");
             }
-
-            db.TableParts.Add(tablePart);
-            db.SaveChanges();
-
-            MessageBox.Show("Документ добавлен!");
         }
 
         private void OpenDocButton_Click(object sender, EventArgs e)

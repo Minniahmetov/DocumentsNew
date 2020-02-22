@@ -16,6 +16,8 @@ namespace DocumentsNew
         public DocForm()
         {
             InitializeComponent();
+            textBox1.Enabled = false;
+            dateTimePicker1.Enabled = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -197,6 +199,46 @@ namespace DocumentsNew
         private void TablePartGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             FillSerials();
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            if (DocIsCorrect())
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                this.DialogResult = DialogResult.None;
+            }
+        }
+
+        private bool DocIsCorrect()
+        {
+            if(comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Не заполнен тип документа!");
+                return false;
+            }
+            foreach (DataGridViewRow row in TablePartGrid.Rows)
+            {
+                if(row.Cells[GoodName.Index].Value == null)
+                {
+                    MessageBox.Show("Введите имя комплектующей в " + row.Cells[Serial.Index].Value.ToString() + " строке");
+                    TablePartGrid.ClearSelection();
+                    TablePartGrid[GoodName.Index, row.Index].Selected = true;
+                    return false;
+                }
+                if (row.Cells[quantity.Index].Value == null || Int32.Parse(row.Cells[quantity.Index].Value.ToString()) < 1)
+                {
+                    MessageBox.Show("Введите количество " + row.Cells[Serial.Index].Value.ToString() + " строке");
+                    TablePartGrid.ClearSelection();
+                    TablePartGrid[quantity.Index, row.Index].Selected = true;
+                    return false;
+                }
+            }
+            
+            return true;
         }
     }
 }
