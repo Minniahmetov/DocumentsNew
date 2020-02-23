@@ -69,6 +69,12 @@
     <Compile Include="DocForm.Designer.cs">
       <DependentUpon>DocForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FindGood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindGood.Designer.cs">
+      <DependentUpon>FindGood.cs</DependentUpon>
+    </Compile>
     <Compile Include="GoodsListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DocForm.resx">
       <DependentUpon>DocForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindGood.resx">
+      <DependentUpon>FindGood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GoodsListForm.resx">
       <DependentUpon>GoodsListForm.cs</DependentUpon>

@@ -48,6 +48,7 @@
             this.RowDeleteButton = new System.Windows.Forms.Button();
             this.tablePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tablePartStringBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.findGood = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablePartGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePartBindingSource)).BeginInit();
@@ -221,11 +222,22 @@
             // 
             this.tablePartStringBindingSource.DataSource = typeof(DocumentsNew.TablePartString);
             // 
+            // findGood
+            // 
+            this.findGood.Location = new System.Drawing.Point(298, 155);
+            this.findGood.Name = "findGood";
+            this.findGood.Size = new System.Drawing.Size(150, 23);
+            this.findGood.TabIndex = 6;
+            this.findGood.Text = "Подбор комплектующей";
+            this.findGood.UseVisualStyleBackColor = true;
+            this.findGood.Click += new System.EventHandler(this.findGood_Click);
+            // 
             // DocForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 476);
+            this.Controls.Add(this.findGood);
             this.Controls.Add(this.RowDeleteButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TablePartGrid);
@@ -264,5 +276,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GoodId;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button RowDeleteButton;
+        private System.Windows.Forms.Button findGood;
     }
 }

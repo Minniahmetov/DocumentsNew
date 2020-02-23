@@ -34,7 +34,7 @@
             this.goodBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.goodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.balanceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goodBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.goodNameDataGridViewTextBoxColumn,
-            this.balanceDataGridViewTextBoxColumn});
+            this.Balance});
             this.dataGridView1.DataSource = this.goodBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(42, 31);
             this.dataGridView1.Name = "dataGridView1";
@@ -74,18 +74,20 @@
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             this.idDataGridViewTextBoxColumn.HeaderText = "Код";
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // goodNameDataGridViewTextBoxColumn
             // 
             this.goodNameDataGridViewTextBoxColumn.DataPropertyName = "GoodName";
             this.goodNameDataGridViewTextBoxColumn.HeaderText = "Наименование";
             this.goodNameDataGridViewTextBoxColumn.Name = "goodNameDataGridViewTextBoxColumn";
+            this.goodNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // balanceDataGridViewTextBoxColumn
+            // Balance
             // 
-            this.balanceDataGridViewTextBoxColumn.DataPropertyName = "Balance";
-            this.balanceDataGridViewTextBoxColumn.HeaderText = "Остаток";
-            this.balanceDataGridViewTextBoxColumn.Name = "balanceDataGridViewTextBoxColumn";
+            this.Balance.HeaderText = "Остаток";
+            this.Balance.Name = "Balance";
+            this.Balance.ReadOnly = true;
             // 
             // GoodsListForm
             // 
@@ -96,6 +98,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "GoodsListForm";
             this.Text = "GoodsListForm";
+            this.Load += new System.EventHandler(this.GoodsListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.goodBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -107,8 +110,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource goodBindingSource;
         private System.Windows.Forms.Button AddGoodButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn goodNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn balanceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Balance;
     }
 }

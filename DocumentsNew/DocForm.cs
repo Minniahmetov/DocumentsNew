@@ -240,5 +240,15 @@ namespace DocumentsNew
             
             return true;
         }
+
+        private void findGood_Click(object sender, EventArgs e)
+        {
+            FindGood findGood = new FindGood();
+            DialogResult result = findGood.ShowDialog(this);
+            if (result == DialogResult.Cancel) return;
+
+
+
+        }
     }
 }
