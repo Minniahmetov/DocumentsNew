@@ -14,6 +14,7 @@ namespace DocumentsNew
 {
     public partial class MainForm : Form
     {
+        static public bool IsOpenOldDoc;
         DocContext db;
         public MainForm()
         {
@@ -21,6 +22,7 @@ namespace DocumentsNew
             db = new DocContext();
             db.Docs.Load();
             DocListView.DataSource = db.Docs.Local.ToBindingList();
+            IsOpenOldDoc = false;
         }
 
         private void AddDocButton_Click(object sender, EventArgs e)
@@ -185,6 +187,11 @@ namespace DocumentsNew
                 docForm.dateTimePicker1.Value = doc.DateTime;
                 docForm.dateTimePicker1.Enabled = false;
                 docForm.comboBox1.SelectedItem = doc.DocType;
+                docForm.comboBox1.Enabled = false;
+
+                IsOpenOldDoc = true; // устанавливаем признак откриытия старого документа для отмены автоматической проверик остатков.
+
+                
 
                 if (doc.DateTime >= DateTime.Today && doc.DateTime < DateTime.Today.AddDays(1))
                 {
@@ -231,6 +238,7 @@ namespace DocumentsNew
                     }
 
                 }
+                IsOpenOldDoc = false; // возвращаем значени по умолчанию
 
                 DialogResult result = docForm.ShowDialog(this);
 
@@ -301,7 +309,6 @@ namespace DocumentsNew
                     db.GoodBalnces.Add(newReg);
                     db.SaveChanges();
                 }
-
             }
         }
 

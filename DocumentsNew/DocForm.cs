@@ -104,11 +104,15 @@ namespace DocumentsNew
                 }
                 if (e.ColumnIndex == quantity.Index)
                 {
-                    if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == "Списание" && int.Parse(TablePartGrid[Balance.Index, e.RowIndex].Value.ToString()) < int.Parse(TablePartGrid[quantity.Index, e.RowIndex].Value.ToString()) )
+                    if (!MainForm.IsOpenOldDoc)
                     {
-                        TablePartGrid[quantity.Index, e.RowIndex].Value = TablePartGrid[Balance.Index, e.RowIndex].Value.ToString();
-                        MessageBox.Show("Не достаточно остатков!");
+                        if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == "Списание" && int.Parse(TablePartGrid[Balance.Index, e.RowIndex].Value.ToString()) < int.Parse(TablePartGrid[quantity.Index, e.RowIndex].Value.ToString()))
+                        {
+                            TablePartGrid[quantity.Index, e.RowIndex].Value = TablePartGrid[Balance.Index, e.RowIndex].Value.ToString();
+                            MessageBox.Show("Не достаточно остатков!");
+                        }
                     }
+               
                 }
             }
         }
