@@ -39,7 +39,6 @@ namespace DocumentsNew
 
             Good good = new Good();
             good.GoodName = addGoodForm.textBox1.Text;
-            //good.Balance = (int)addGoodForm.numericUpDown1.Value;
 
             db.Goods.Add(good);
             db.SaveChanges();

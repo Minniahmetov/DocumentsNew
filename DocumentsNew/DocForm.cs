@@ -243,12 +243,12 @@ namespace DocumentsNew
 
         private void findGood_Click(object sender, EventArgs e)
         {
+            //добавление комплектующей из формы подбора в форму документа
             FindGood findGood = new FindGood();
             DialogResult result = findGood.ShowDialog(this);
             if (result == DialogResult.Cancel) return;
-
-
-
+            TablePartGrid.Rows.Add();
+            TablePartGrid[GoodName.Index, TablePartGrid.RowCount - 1].Value = findGood.dataGridView1.SelectedRows[0].Cells["goodNameDataGridViewTextBoxColumn"].Value;
         }
     }
 }
