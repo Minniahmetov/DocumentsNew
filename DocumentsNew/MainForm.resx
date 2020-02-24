@@ -120,4 +120,13 @@
   <metadata name="docBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="docBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Кнопка "Добавить" - открывает форму создания нового документа;
+Кнопка "Открыть" - открывает выбраный документ для просмотра или редактирования;
+Кнопка "Список комплектующих" - открывает форму списка косплектующих для просмотра существующих или создания новых;
+Кнопка "Показать записи" - показывает записи регистрирующие изменения в разрезе комплектующих. </value>
+  </data>
 </root>

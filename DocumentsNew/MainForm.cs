@@ -22,6 +22,10 @@ namespace DocumentsNew
             db = new DocContext();
             db.Docs.Load();
             DocListView.DataSource = db.Docs.Local.ToBindingList();
+            objectListView1.SetObjects(db.Docs.Local.ToList());
+            objectListView1.HasCollapsibleGroups = false;
+            objectListView1.FullRowSelect = true;
+            objectListView1.MultiSelect = false;
             IsOpenOldDoc = false;
         }
 
@@ -157,6 +161,9 @@ namespace DocumentsNew
                 db.SaveChanges();
 
                 MessageBox.Show("Документ добавлен!");
+                RefreshList();
+
+
             }
         }
 
@@ -167,14 +174,11 @@ namespace DocumentsNew
 
         private void OpenDoc()
         {
-            if (DocListView.SelectedRows.Count > 0)
+            if (objectListView1.SelectedIndex > 0)
             {
-                int index = DocListView.SelectedRows[0].Index;
-                int id = 0;
+                object selectedRow = objectListView1.SelectedObject;
+                int id =  Int32.Parse(IdOlvColumn.GetValue(selectedRow).ToString());
 
-                bool converted = Int32.TryParse(DocListView["Id", index].Value.ToString(), out id);
-                if (converted == false)
-                    return;
 
                 Doc doc = db.Docs.Find(id);
                 TablePart tablePart = db.TableParts.Find(id);
@@ -308,7 +312,11 @@ namespace DocumentsNew
 
                     db.GoodBalnces.Add(newReg);
                     db.SaveChanges();
+
+                    MessageBox.Show("Документ обновлен!");
+                    RefreshList();
                 }
+                
             }
         }
 
@@ -359,6 +367,21 @@ namespace DocumentsNew
         }
 
         private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RefreshList()
+        {
+            using (DocContext db = new DocContext())
+            {
+                var DocList = db.Docs;
+                this.objectListView1.SetObjects(DocList);
+            }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

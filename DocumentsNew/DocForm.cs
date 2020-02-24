@@ -40,6 +40,15 @@ namespace DocumentsNew
                     autoText.AutoCompleteCustomSource = DataCollection;
                 }
             }
+            else if (colIndex == TablePartGrid.Columns["quantity"].Index)
+            {
+                TextBox tb1 = e.Control as TextBox;
+                tb1.AutoCompleteMode = AutoCompleteMode.None;
+                if (tb1 != null)
+                {
+                    tb1.KeyPress += new KeyPressEventHandler(CheckKey);
+                }
+            }
         }
 
         private void addItems(AutoCompleteStringCollection col)
@@ -59,6 +68,7 @@ namespace DocumentsNew
                 {
                     using (DocContext db = new DocContext())
                     {
+                        
                         string goodname = TablePartGrid[e.ColumnIndex, e.RowIndex].Value.ToString();
                         Good good = db.Goods.FirstOrDefault(Good => Good.GoodName == goodname);
                         if (good != null)
@@ -253,6 +263,49 @@ namespace DocumentsNew
             if (result == DialogResult.Cancel) return;
             TablePartGrid.Rows.Add();
             TablePartGrid[GoodName.Index, TablePartGrid.RowCount - 1].Value = findGood.dataGridView1.SelectedRows[0].Cells["goodNameDataGridViewTextBoxColumn"].Value;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckKey(object sender, KeyPressEventArgs e)
+        {
+
+            if (TablePartGrid.CurrentCell.ColumnIndex == quantity.Index)
+            {
+                if (!char.IsControl(e.KeyChar)
+                && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                if (!char.IsControl(e.KeyChar)
+                && !char.IsWhiteSpace(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+            
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == "Списание")
+            {
+                foreach (DataGridViewRow row in TablePartGrid.Rows)
+                {
+                    if ( int.Parse(row.Cells[Balance.Index].Value.ToString()) < int.Parse(row.Cells[quantity.Index].Value.ToString()))
+                    {
+                        MessageBox.Show("Не достаточно остатков в " + (row.Index + 1).ToString() + " строке! Количество изменено с " + row.Cells[quantity.Index].Value.ToString() + " на " + row.Cells[Balance.Index].Value.ToString());
+                        row.Cells[quantity.Index].Value = row.Cells[Balance.Index].Value;
+                        row.Cells[quantity.Index].Selected = true;
+                    }
+                }
+            }
         }
     }
 }

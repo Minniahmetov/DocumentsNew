@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,9 +47,10 @@
             this.GoodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.RowDeleteButton = new System.Windows.Forms.Button();
+            this.findGood = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tablePartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tablePartStringBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.findGood = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TablePartGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePartBindingSource)).BeginInit();
@@ -107,6 +109,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(200, 21);
             this.comboBox1.TabIndex = 3;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // dateTimePicker1
             // 
@@ -214,14 +217,6 @@
             this.RowDeleteButton.UseVisualStyleBackColor = true;
             this.RowDeleteButton.Click += new System.EventHandler(this.RowDeleteButton_Click);
             // 
-            // tablePartBindingSource
-            // 
-            this.tablePartBindingSource.DataSource = typeof(DocumentsNew.TablePart);
-            // 
-            // tablePartStringBindingSource
-            // 
-            this.tablePartStringBindingSource.DataSource = typeof(DocumentsNew.TablePartString);
-            // 
             // findGood
             // 
             this.findGood.Location = new System.Drawing.Point(298, 155);
@@ -232,11 +227,30 @@
             this.findGood.UseVisualStyleBackColor = true;
             this.findGood.Click += new System.EventHandler(this.findGood_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(13, 423);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(461, 188);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.Text = resources.GetString("textBox2.Text");
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // tablePartBindingSource
+            // 
+            this.tablePartBindingSource.DataSource = typeof(DocumentsNew.TablePart);
+            // 
+            // tablePartStringBindingSource
+            // 
+            this.tablePartStringBindingSource.DataSource = typeof(DocumentsNew.TablePartString);
+            // 
             // DocForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 476);
+            this.ClientSize = new System.Drawing.Size(495, 645);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.findGood);
             this.Controls.Add(this.RowDeleteButton);
             this.Controls.Add(this.button1);
@@ -252,6 +266,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tablePartBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePartStringBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -277,5 +292,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button RowDeleteButton;
         private System.Windows.Forms.Button findGood;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
