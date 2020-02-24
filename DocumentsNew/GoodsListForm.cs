@@ -87,5 +87,29 @@ namespace DocumentsNew
             }
 
         }
+
+        private void dataGridView1_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
+        { //можно удалять
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                FillBalance(row);
+            }
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                FillBalance(row);
+            }
+        }
+
+        private void dataGridView1_Sorted(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                FillBalance(row);
+            }
+        }
     }
 }

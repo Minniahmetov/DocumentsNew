@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddGoodButton = new System.Windows.Forms.Button();
-            this.goodBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.goodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Balance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goodBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -52,8 +52,17 @@
             this.dataGridView1.DataSource = this.goodBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(42, 31);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(345, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(360, 150);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.ColumnSortModeChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnSortModeChanged);
+            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
+            this.dataGridView1.Sorted += new System.EventHandler(this.dataGridView1_Sorted);
+            // 
+            // Balance
+            // 
+            this.Balance.HeaderText = "Остаток";
+            this.Balance.Name = "Balance";
+            this.Balance.ReadOnly = true;
             // 
             // AddGoodButton
             // 
@@ -64,10 +73,6 @@
             this.AddGoodButton.Text = "Добавить";
             this.AddGoodButton.UseVisualStyleBackColor = true;
             this.AddGoodButton.Click += new System.EventHandler(this.AddGood_Click);
-            // 
-            // goodBindingSource
-            // 
-            this.goodBindingSource.DataSource = typeof(DocumentsNew.Good);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -83,11 +88,9 @@
             this.goodNameDataGridViewTextBoxColumn.Name = "goodNameDataGridViewTextBoxColumn";
             this.goodNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // Balance
+            // goodBindingSource
             // 
-            this.Balance.HeaderText = "Остаток";
-            this.Balance.Name = "Balance";
-            this.Balance.ReadOnly = true;
+            this.goodBindingSource.DataSource = typeof(DocumentsNew.Good);
             // 
             // GoodsListForm
             // 
