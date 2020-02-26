@@ -200,9 +200,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Downloads\ObjectListViewFull-2.9.1\ObjectListViewDemo\ObjectListView\ObjectListView2012.csproj">
-      <Project>{18feda0c-d147-4286-b39a-01204808106a}</Project>
-      <Name>ObjectListView2012</Name>
+    <ProjectReference Include="..\..\ObjectListViewDemo\ObjectListView\1ObjectListView2012.csproj">
+      <Project>{9f7d61c4-c759-4cdd-b9f2-1eab915247b7}</Project>
+      <Name>1ObjectListView2012</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
